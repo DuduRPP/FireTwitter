@@ -15,9 +15,14 @@ export const Navbar = () => {
       <Link to="/"> Home </Link>
       {user ? <Link to="/createpost"> Post </Link> : <Link to="/login"> Login </Link>}
       <div>
-        <p>{user?.displayName}</p>
-        {user && <img src={user?.photoURL || ""} width="100" height="100" />}
-        <button onClick={signUserOut}>Logout</button>
+        {user ? 
+          <>
+            <p>{user?.displayName}</p>
+            <img src={user?.photoURL || ""} width="100" height="100" />
+            <button onClick={signUserOut}>Logout</button>
+          </>
+        : <></>}
+        
       </div>
     </div>
   )

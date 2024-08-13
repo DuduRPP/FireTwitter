@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 interface CreatePostData {
   content: string;
@@ -12,6 +13,7 @@ interface CreatePostData {
 
 export const CreateForm = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     content: yup.string().required("Content is required"),
@@ -29,6 +31,8 @@ export const CreateForm = () => {
       username: user?.displayName,
       userId: user?.uid,
     })
+
+    navigate("/");
   }
 
   return (
